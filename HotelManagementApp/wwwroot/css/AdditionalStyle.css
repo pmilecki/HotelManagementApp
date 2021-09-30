@@ -1,0 +1,28 @@
+﻿body {
+    background-color: #7A9E9F;
+    color: #4F6367;
+}
+
+.mb-3 {
+    background-color: #B8D8D8!important;
+}
+
+.main-home-menu{
+    padding-top: 32px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    text-align:center;
+}
+
+.main-menu-row{
+    flex-direction: column;
+}
+
+.menu-column1 {
+}
+
+.menu-column2 {
+
+    
+}
