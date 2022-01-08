@@ -23,11 +23,6 @@ namespace HotelManagementApp.Controllers
             return View();
         }
 
-        public IActionResult AdminPage()
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();
