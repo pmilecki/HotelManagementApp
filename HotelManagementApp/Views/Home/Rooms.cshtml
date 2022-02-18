@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<HotelManagementApp.Entities.RoomsEntity>
+@inject SignInManager<IdentityUser> SignInManager
+
+
+<h2>Lista pokoi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.RoomNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.Localization)</th>
+            <th>@Html.DisplayNameFor(model => model.IsUsable)</th>
+            <th>@Html.DisplayNameFor(model => model.NoOfSingleBeds)</th>
+            <th>@Html.DisplayNameFor(model => model.NoOfDualBeds)</th>
+            <th>@Html.DisplayNameFor(model => model.NoOfBathrooms)</th>
+            <th>@Html.DisplayNameFor(model => model.CostPerNight)</th>
+            <th>Informacje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.IsUsable == true)
+            {
+            <tr>
+                <td>@item.RoomNumber</td>
+                <td>@item.Localization</td>
+                <td>@(item.IsUsable ? "Tak" : "Nie")</td>
+                <td>@item.NoOfSingleBeds</td>
+                <td>@item.NoOfDualBeds</td>
+                <td>@item.NoOfBathrooms</td>
+                <td>@item.CostPerNight</td>
+                <td>@Html.ActionLink("Podgląd", "Index", "Rooms", new { id = item.Id})</td>
+            </tr>
+            }
+            else if (User.IsInRole("administrator"))
+            {
+            <tr>
+                <td>@item.RoomNumber</td>
+                <td>@item.Localization</td>
+                <td>@(item.IsUsable ? "Tak" : "Nie")</td>
+                <td>@item.NoOfSingleBeds</td>
+                <td>@item.NoOfDualBeds</td>
+                <td>@item.NoOfBathrooms</td>
+                <td>@item.CostPerNight</td>
+                <td>@Html.ActionLink("Podgląd", "Index", "Rooms", new { id = item.Id})</td>
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+

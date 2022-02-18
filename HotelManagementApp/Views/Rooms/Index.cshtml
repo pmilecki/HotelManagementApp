@@ -1,0 +1,18 @@
+﻿@model RoomsModel
+
+@{
+    var room = ViewData.Model;
+}
+
+<h1>Opis pokoju</h1>
+
+<div>@Html.DisplayNameFor(model => model.RoomNumber): @room.RoomNumber</div>
+<div>@Html.DisplayNameFor(model => model.Localization): @room.FullLocalization</div>
+<div>@Html.DisplayNameFor(model => model.NoOfSingleBeds): @room.NoOfSingleBeds</div>
+<div>@Html.DisplayNameFor(model => model.NoOfDualBeds): @room.NoOfDualBeds</div>
+<div>@Html.DisplayNameFor(model => model.NoOfBathrooms): @room.NoOfBathrooms</div>
+<div>@Html.DisplayNameFor(model => model.CostPerNight): @room.CostPerNight zł</div>
+
+@Html.ActionLink("Złóż rezerwację", "Index", "Reservation", new { roomId = @room.RoomNumber})
+
+<img src="https://www.clinex.com.pl/blog/wp-content/uploads/2019/12/sprzatanie-pokoju.jpg" />

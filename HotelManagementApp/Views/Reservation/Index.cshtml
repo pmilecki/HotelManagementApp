@@ -1,0 +1,36 @@
+﻿@model ReservationModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    var room = ViewData.Model;
+}
+
+<h1>Rezerwacja pokoju</h1>
+
+<form method="POST" asp-action="PlaceReservation">
+    <div class="form-group">
+        <input asp-for="CustomerName" class="form-control" value="@User.Identity.Name" />
+        @Html.ValidationMessageFor(Model => Model.CustomerName, "Pole wymagane", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RoomNumber">Numer pokoju</label>
+        <input asp-for="RoomNumber" class="form-control" readonly="true" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReservationStart">Początek pobytu</label>
+        <input asp-for="ReservationStart" id="datepicker" class="form-control" value="@DateTime.Now.ToString()"/>
+        @Html.ValidationMessageFor(Model => Model.ReservationStart, "Pole wymagane", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReservationEnd">Koniec pobytu</label>
+        <input asp-for="ReservationEnd" id="datepicker" class="form-control" value="@DateTime.Now.ToString()" />
+        @Html.ValidationMessageFor(Model => Model.ReservationEnd, "Pole wymagane", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Złóż rezerwację" />
+    </div>
+</form>

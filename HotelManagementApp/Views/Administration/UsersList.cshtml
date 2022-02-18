@@ -1,11 +1,15 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
 
+@{
+    ViewData["Title"] = "Lista użytkowników";
+    Layout = "_AdminLayout";
+}
+
 <h2>Lista użytkowników</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Nazwa użytkownika</th>
             <th>Adres email</th>
             <th>Numer telefonu</th>
@@ -14,8 +18,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
+            <tr>               
                 <td>@item.UserName</td>
                 <td>@item.Email</td>
                 <td>@item.PhoneNumber</td>

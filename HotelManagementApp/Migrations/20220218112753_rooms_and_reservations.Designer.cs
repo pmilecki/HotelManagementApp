@@ -4,14 +4,16 @@ using HotelManagementApp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelManagementApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220218112753_rooms_and_reservations")]
+    partial class rooms_and_reservations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,85 +21,82 @@ namespace HotelManagementApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HotelManagementApp.Entities.LocalizationEntity", b =>
+            modelBuilder.Entity("HotelManagementApp.Entities.AspNetUsersEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Floor")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Wing")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Localization");
-                });
-
-            modelBuilder.Entity("HotelManagementApp.Entities.ReservationsEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ReservationEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ReservationStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Uzytkownicy");
                 });
 
-            modelBuilder.Entity("HotelManagementApp.Entities.RoomsEntity", b =>
+            modelBuilder.Entity("HotelManagementApp.Entities.PokojeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("CostPerNight")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsUsable")
+                    b.Property<bool>("DostepnyDoUzytku")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Localization")
+                    b.Property<int>("IloscLazienek")
                         .HasColumnType("int");
 
-                    b.Property<int>("NoOfBathrooms")
+                    b.Property<int>("IloscLozekPodwojnych")
                         .HasColumnType("int");
 
-                    b.Property<int>("NoOfDualBeds")
+                    b.Property<int>("IloscLozekPojedynczych")
                         .HasColumnType("int");
 
-                    b.Property<int>("NoOfSingleBeds")
+                    b.Property<decimal>("KosztZaNoc")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Lokalizacja")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomNumber")
+                    b.Property<int>("NumerPokoju")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Pokoje");
+                });
+
+            modelBuilder.Entity("HotelManagementApp.Entities.RezerwacjeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdPokoju")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdRezerwujacego")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("KoniecRezerwacji")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PoczatekRezerwacji")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rezerwacje");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

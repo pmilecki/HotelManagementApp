@@ -11,15 +11,15 @@
 <div class="main-home-menu">
     <div class="main-menu-row">
         <div class="menu-column1">
-            <a class="display-4">Pokoje</a>
+            <a class="display-4" asp-controller="Home" asp-action="Rooms">Pokoje</a>
         </div>
         <div class="menu-column2">
-            <a class="display-4">Rezerwacje</a>
+            <a class="display-4" asp-controller="Administration" asp-action="ReservationList">Rezerwacje</a>
         </div>
     </div>
     <div class="main-menu-row">
         <div class="menu-column1">
-            <a class="display-4">Klienci</a>
+            <a class="display-4" asp-controller="Administration" asp-action="UsersList">Użytkownicy</a>
         </div>
         <div class="menu-column2">
             <a class="display-4">Aktualne</a>
