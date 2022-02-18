@@ -51,5 +51,12 @@ namespace HotelManagementApp.Services
             var products = await productsQuery.ToListAsync();
             return products;
         }
+
+        public async Task<string> GetUserPhone()
+        {
+            var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            return currentUser.PhoneNumber;
+        }
     }
 }

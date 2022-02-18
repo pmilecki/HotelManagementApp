@@ -26,7 +26,7 @@ namespace HotelManagementApp.Services
 
             IQueryable<RoomsEntity> rooms = _dbContext.Rooms;
 
-            var room = rooms.Where(r => r.Id == parsedId).FirstOrDefault();
+            var room = rooms.Where(r => r.RoomNumber == parsedId).FirstOrDefault();
 
             var roomToPass = new RoomsModel
             {

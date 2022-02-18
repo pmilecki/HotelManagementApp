@@ -9,5 +9,6 @@ namespace HotelManagementApp.Services
     {
         Task Add(ReservationModel reservation);
         Task<IEnumerable<ReservationsEntity>> GetAll();
+        Task<string> GetUserPhone();
     }
 }

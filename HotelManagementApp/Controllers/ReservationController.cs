@@ -16,10 +16,11 @@ namespace HotelManagementApp.Controllers
             _reservationService = reservationService;
         }
 
-        public IActionResult Index(string roomId)
+        public async Task<IActionResult> Index(string roomId)
         {
             var roomReservation = new ReservationModel();
             roomReservation.RoomNumber = int.Parse(roomId);
+            roomReservation.PhoneNumber = await _reservationService.GetUserPhone();
             return View(roomReservation);
         }
 
