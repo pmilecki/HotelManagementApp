@@ -1,23 +1,19 @@
 ﻿@model ReservationModel
 @using Microsoft.AspNetCore.Identity
-@*
-@{
-    var room = ViewData.Model;
-}*@
 
 <h1>Rezerwacja pokoju</h1>
 
 <form method="POST" asp-action="PlaceReservation">
-    @Html.AntiForgeryToken()
+    
     <div class="form-group">
         <input asp-for="CustomerName" class="form-control" value="@User.Identity.Name" />
-        @*@Html.ValidationMessageFor(Model => Model.CustomerName, "Pole wymagane", new { @class = "text-danger"})*@
+        <span asp-validation-for="CustomerName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="PhoneNumber">Numer telefonu</label>
         <input asp-for="PhoneNumber" id="datepicker" class="form-control" value="@Model.PhoneNumber" />
-        @*@Html.ValidationMessageFor(Model => Model.PhoneNumber, "Pole wymagane", new { @class = "text-danger"})*@
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -27,18 +23,14 @@
 
     <div class="form-group">
         <label asp-for="ReservationStart">Początek pobytu</label>
-        <input asp-for="ReservationStart" id="datepicker" class="form-control" value="@DateTime.Now.ToString()"/>
-        @*@Html.ValidationMessageFor(Model => Model.ReservationStart, "Pole wymagane", new { @class = "text-danger"})*@
+        <input asp-for="ReservationStart" id="datepicker" class="form-control" value="@Model.ReservationStart"/>             <span asp-validation-for="ReservationStart" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="ReservationEnd">Koniec pobytu</label>
-        <input asp-for="ReservationEnd" id="datepicker" class="form-control" value="@DateTime.Now.ToString()" />
-        @*@Html.ValidationMessageFor(Model => Model.ReservationEnd, "Pole wymagane", new { @class = "text-danger"})*@
+        <input asp-for="ReservationEnd" id="datepicker" class="form-control" value="@Model.ReservationEnd" />
+        <span asp-validation-for="ReservationEnd" class="text-danger"></span>
     </div>
-
-    
-
 
     <div class="form-group">
         <input type="submit" value="Złóż rezerwację" />

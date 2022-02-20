@@ -27,8 +27,15 @@ namespace HotelManagementApp.Controllers
         [HttpPost]
         public async Task<IActionResult> PlaceReservation(ReservationModel reservation)
         {
-            await _reservationService.Add(reservation);
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("Index", reservation);
+            }
+            else
+            {
+                await _reservationService.Add(reservation);
+                return View();
+            }
         }
 
         public async Task<IActionResult> ReservationList()

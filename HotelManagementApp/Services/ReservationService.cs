@@ -63,13 +63,9 @@ namespace HotelManagementApp.Services
         {
             int parsedId = int.Parse(reservationData);
 
-            //IQueryable<ReservationsEntity> reservations = _dbContext.Reservations;
-            //reservations = reservations.Where(x => x.Id == parsedId);
-            using (var context = _dbContext)
-            {
-                context.Reservations.Remove(context.Reservations.Find(parsedId));
-                await _dbContext.SaveChangesAsync();
-            }
+            _dbContext.Reservations.Remove(_dbContext.Reservations.Find(parsedId));
+            await _dbContext.SaveChangesAsync();
+
         }
     }
 }

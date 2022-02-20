@@ -25,7 +25,7 @@ namespace HotelManagementApp.Models
         public string CustomerName { get; set; }
 
         [Required]
-        [StringLength(9, ErrorMessage = "Numer telefonu musi składać się z 9 cyfr")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Numer telefonu musi składać się z 9 cyfr")]
         public string PhoneNumber { get; set; }
     }
 }
