@@ -20,10 +20,12 @@ namespace HotelManagementApp.Models
         public DateTime ReservationEnd { get; set; }
         public IdentityUser CustomerId { get; set; }
         
+        [StringLength(60, MinimumLength = 5, ErrorMessage = "Podana nazwa jest za krótka")]
         [Required]
         public string CustomerName { get; set; }
 
         [Required]
+        [StringLength(9, ErrorMessage = "Numer telefonu musi składać się z 9 cyfr")]
         public string PhoneNumber { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Moje konto";
+}
+<div class="text-center">
+    <h1 class="display-1">Informacje o moim koncie</h1>    
+</div>
+
+<div class="main-home-menu">
+    <div class="main-menu-row">
+        <div>
+            <a class="display-4" asp-area="Identity" asp-page="/Account/Manage/Index">Moje konto</a>
+        </div>
+    </div>
+    <div class="main-menu-row">
+        <div>
+            <a class="display-4" asp-controller="Reservation" asp-action="ReservationList">Moje rezerwacje</a>
+        </div>
+    </div>
+</div>

@@ -34,6 +34,12 @@ namespace HotelManagementApp.Controllers
             return View(rooms);
         }
 
+        [Authorize]
+        public IActionResult MyAccount()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

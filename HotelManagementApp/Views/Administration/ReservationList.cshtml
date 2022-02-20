@@ -17,7 +17,7 @@
             <th>@Html.DisplayNameFor(model => model.ReservationEnd)</th>
             <th>@Html.DisplayNameFor(model => model.CustomerId)</th>
             <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-            
+            <th>Anulowanie rezerwacji</th>
         </tr>
     </thead>
     <tbody>
@@ -31,7 +31,44 @@
                 <td>@item.ReservationEnd.ToString("d")</td>
                 <td>@item.CustomerId</td>
                 <td>@item.PhoneNumber</td>
+                <td><button class="cancel-reservation" value="@item.Id">Anuluj</button></td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.cancel-reservation').forEach(element => {
+                element.addEventListener('click', sendCancelation, false)
+            })
+        })
+        
+        var fetchedData
+
+        const sendCancelation = (e) => {
+            e.preventDefault();      
+            fetchedData = e.target.attributes.value.nodeValue
+            if(confirm('Na pewno anulować rezerwację?')){
+                sendFetchedData(fetchedData)
+            }            
+        }
+
+        function sendFetchedData(gatheredData){
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("CancellingReservation")",
+                data: {cancelationData: gatheredData},
+                dataType: "text",
+                success: function (data) {
+                    alert("OK");
+                },
+                error: function (data) {
+                    alert("ERROR");
+                }
+            });
+        }
+    </script>
+}

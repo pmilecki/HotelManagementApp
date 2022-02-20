@@ -1,4 +1,5 @@
 ﻿using HotelManagementApp.Database;
+using HotelManagementApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace HotelManagementApp.Controllers
     public class AdministrationController : Controller
     {
         private readonly AppDbContext _dbContext;
+        private readonly IReservationService _reservationService;
 
-        public AdministrationController (AppDbContext dbContext)
+        public AdministrationController (AppDbContext dbContext, IReservationService reservationService)
         {
             _dbContext = dbContext;
+            _reservationService = reservationService;
         }
 
         public IActionResult Index()
@@ -37,6 +40,13 @@ namespace HotelManagementApp.Controllers
         {
             var reservations = await _dbContext.Reservations.ToListAsync();
             return View(reservations);
+        }
+
+        [HttpPost]
+        public IActionResult CancellingReservation(string cancelationData)
+        {
+            _reservationService.RemoveReservation(cancelationData);
+            return View();
         }
     }
 }

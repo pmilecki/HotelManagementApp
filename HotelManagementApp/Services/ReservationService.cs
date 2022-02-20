@@ -34,7 +34,7 @@ namespace HotelManagementApp.Services
                 ReservationEnd = reservation.ReservationEnd,
                 CustomerId = currentUser.Id,
                 CustomerName = reservation.CustomerName,
-                PhoneNumber = currentUser.PhoneNumber
+                PhoneNumber = reservation.PhoneNumber
             };
 
             await _dbContext.Reservations.AddAsync(entity);
@@ -45,11 +45,11 @@ namespace HotelManagementApp.Services
         {
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-            IQueryable<ReservationsEntity> productsQuery = _dbContext.Reservations;
-            productsQuery = productsQuery.Where(x => x.CustomerId == currentUser.Id);
+            IQueryable<ReservationsEntity> reservationQuery = _dbContext.Reservations;
+            reservationQuery = reservationQuery.Where(x => x.CustomerId == currentUser.Id);
 
-            var products = await productsQuery.ToListAsync();
-            return products;
+            var reservations = await reservationQuery.ToListAsync();
+            return reservations;
         }
 
         public async Task<string> GetUserPhone()
@@ -57,6 +57,19 @@ namespace HotelManagementApp.Services
             var currentUser = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
             return currentUser.PhoneNumber;
+        }
+
+        public async void RemoveReservation(string reservationData)
+        {
+            int parsedId = int.Parse(reservationData);
+
+            //IQueryable<ReservationsEntity> reservations = _dbContext.Reservations;
+            //reservations = reservations.Where(x => x.Id == parsedId);
+            using (var context = _dbContext)
+            {
+                context.Reservations.Remove(context.Reservations.Find(parsedId));
+                await _dbContext.SaveChangesAsync();
+            }
         }
     }
 }

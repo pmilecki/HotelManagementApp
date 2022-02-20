@@ -30,5 +30,11 @@ namespace HotelManagementApp.Controllers
             await _reservationService.Add(reservation);
             return View();
         }
+
+        public async Task<IActionResult> ReservationList()
+        {
+            var reservation = await _reservationService.GetAll();
+            return View(reservation);
+        }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<HotelManagementApp.Entities.ReservationsEntity>
+
+@{
+    ViewData["Title"] = "Lista moich rezerwacji";
+    Layout = "_Layout";
+}
+
+<h2>Lista moich rezerwacji</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.RoomId)</th>
+            <th>@Html.DisplayNameFor(model => model.ReservationStart)</th>
+            <th>@Html.DisplayNameFor(model => model.ReservationEnd)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>  
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>               
+                <td>@item.RoomId</td>
+                <td>@item.ReservationStart.ToString("d")</td>
+                <td>@item.ReservationEnd.ToString("d")</td>
+                <td>@item.PhoneNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
