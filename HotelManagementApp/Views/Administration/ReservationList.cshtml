@@ -62,10 +62,10 @@
                 url: "@Url.Action("CancellingReservation")",
                 data: {cancelationData: gatheredData},
                 dataType: "text",
-                success: function (data) {
+                success: function () {
                     alert("OK");
                 },
-                error: function (data) {
+                error: function () {
                     alert("ERROR");
                 }
             });

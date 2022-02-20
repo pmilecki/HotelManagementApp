@@ -59,7 +59,7 @@ namespace HotelManagementApp.Services
             return currentUser.PhoneNumber;
         }
 
-        public async void RemoveReservation(string reservationData)
+        public async Task RemoveReservation(string reservationData)
         {
             int parsedId = int.Parse(reservationData);
 

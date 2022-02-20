@@ -43,10 +43,10 @@ namespace HotelManagementApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult CancellingReservation(string cancelationData)
+        public async Task<IActionResult> CancellingReservation(string cancelationData)
         {
-            _reservationService.RemoveReservation(cancelationData);
-            return View();
+            await _reservationService.RemoveReservation(cancelationData);
+            return Ok();
         }
     }
 }
