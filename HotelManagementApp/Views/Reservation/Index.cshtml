@@ -3,6 +3,11 @@
 
 <h1>Rezerwacja pokoju</h1>
 
+@{
+    string today = DateTime.Now.Date.ToString("yyyy-MM-dd");
+    string tomorow = DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd");
+}
+
 <form method="POST" asp-action="PlaceReservation">
     
     <div class="form-group">
@@ -12,23 +17,24 @@
 
     <div class="form-group">
         <label asp-for="PhoneNumber">Numer telefonu</label>
-        <input asp-for="PhoneNumber" id="datepicker" class="form-control" value="@Model.PhoneNumber" />
+        <input asp-for="PhoneNumber" class="form-control" value="@Model.PhoneNumber" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="RoomNumber">Numer pokoju</label>
-        <input asp-for="RoomNumber" class="form-control" readonly="true" />
+        <input asp-for="RoomNumber" class="form-control" readonly="true" value="@Model.RoomNumber" />
     </div>
 
     <div class="form-group">
         <label asp-for="ReservationStart">Początek pobytu</label>
-        <input asp-for="ReservationStart" id="datepicker" class="form-control" value="@Model.ReservationStart"/>             <span asp-validation-for="ReservationStart" class="text-danger"></span>
+        <input asp-for="ReservationStart" id="start" class="form-control" type="date" min="@today" value="@today" />
+        <span asp-validation-for="ReservationStart" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="ReservationEnd">Koniec pobytu</label>
-        <input asp-for="ReservationEnd" id="datepicker" class="form-control" value="@Model.ReservationEnd" />
+        <input asp-for="ReservationEnd" id="end" class="form-control" type="date" min="" value="@tomorow" />
         <span asp-validation-for="ReservationEnd" class="text-danger"></span>
     </div>
 
@@ -36,3 +42,7 @@
         <input type="submit" value="Złóż rezerwację" />
     </div>
 </form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

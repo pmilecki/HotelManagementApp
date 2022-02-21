@@ -45,25 +45,24 @@
                 element.addEventListener('click', sendCancelation, false)
             })
         })
-        
-        var fetchedData
 
         const sendCancelation = (e) => {
-            e.preventDefault();      
-            fetchedData = e.target.attributes.value.nodeValue
+            e.preventDefault();
             if(confirm('Na pewno anulować rezerwację?')){
-                sendFetchedData(fetchedData)
-            }            
+                sendFetchedData(e.target)
+            }
         }
 
-        function sendFetchedData(gatheredData){
+        function sendFetchedData(button){
             $.ajax({
                 type: 'POST',
                 url: "@Url.Action("CancellingReservation")",
-                data: {cancelationData: gatheredData},
+                data: {cancelationData: button.attributes.value.nodeValue},
                 dataType: "text",
                 success: function () {
-                    alert("OK");
+                    //alert("OK");
+                    const row = button.parentNode
+                    row.parentNode.remove(row)
                 },
                 error: function () {
                     alert("ERROR");

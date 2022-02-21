@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HotelManagementApp.Services
 {
@@ -65,7 +66,22 @@ namespace HotelManagementApp.Services
 
             _dbContext.Reservations.Remove(_dbContext.Reservations.Find(parsedId));
             await _dbContext.SaveChangesAsync();
+        }
 
+        public bool IsRoomAvaliableForReservation(ReservationModel reservation)
+        {
+            var currentReservation = _dbContext.Reservations
+                .Where(x => x.RoomId == reservation.RoomNumber && (reservation.ReservationStart <= x.ReservationEnd && reservation.ReservationStart >= x.ReservationStart || x.ReservationStart <= reservation.ReservationEnd && x.ReservationStart >= reservation.ReservationStart))
+                .FirstOrDefault();
+
+            if(currentReservation != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

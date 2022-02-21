@@ -2,6 +2,7 @@
 using HotelManagementApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace HotelManagementApp.Controllers
@@ -33,6 +34,12 @@ namespace HotelManagementApp.Controllers
             }
             else
             {
+                if (!_reservationService.IsRoomAvaliableForReservation(reservation))
+                {
+                    ModelState.AddModelError(nameof(reservation.ReservationEnd), "Pokój jest zarezerwowany w tym terminie");
+                    return View("Index", reservation);
+                }
+
                 await _reservationService.Add(reservation);
                 return View();
             }

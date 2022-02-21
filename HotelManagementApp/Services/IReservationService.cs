@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HotelManagementApp.Entities;
+using System;
 
 namespace HotelManagementApp.Services
 {
@@ -11,5 +12,6 @@ namespace HotelManagementApp.Services
         Task<IEnumerable<ReservationsEntity>> GetAll();
         Task<string> GetUserPhone();
         Task RemoveReservation(string reservationData);
+        bool IsRoomAvaliableForReservation(ReservationModel reservation);
     }
 }

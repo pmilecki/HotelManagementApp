@@ -21,13 +21,13 @@ namespace HotelManagementApp.Entities
         [DataType(DataType.Date)]
         public DateTime ReservationEnd { get; set; }
 
-        [DisplayName("ID klient")]
+        [DisplayName("ID klienta")]
         public string CustomerId { get; set; }
 
         [DisplayName("Nazwa klienta")]
         public string CustomerName { get; set; }
 
-        [DisplayName("NumerTelefonu")]
+        [DisplayName("Numer Telefonu")]
         public string PhoneNumber { get; set; }
     }
 }
