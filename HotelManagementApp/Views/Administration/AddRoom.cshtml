@@ -1,0 +1,51 @@
+﻿@model RoomsModel
+
+<h1>Dodawanie nowego pokoju</h1>
+
+<form method="POST" asp-action="AddRoomToDB">
+    
+    <div class="form-group">
+        <label asp-for="RoomNumber">Numer pokoju</label>
+        <input asp-for="RoomNumber" class="form-control" />
+        <span asp-validation-for="RoomNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Localization">Lokalizacja</label>
+        @Html.DropDownListFor(model => model.Localization, Model.Localizations)
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsUsable">Czy do użytku</label>
+        <input asp-for="IsUsable" class="form-control" type="checkbox"/>
+        <span asp-validation-for="IsUsable" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NoOfSingleBeds">Liczba łóżek pojedynczych</label>
+        <input asp-for="NoOfSingleBeds" class="form-control" />
+        <span asp-validation-for="NoOfSingleBeds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NoOfDualBeds">Liczba łóżek podwójnych</label>
+        <input asp-for="NoOfDualBeds" class="form-control" />
+        <span asp-validation-for="NoOfDualBeds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NoOfBathrooms">Liczba łazienek</label>
+        <input asp-for="NoOfBathrooms" class="form-control" />
+        <span asp-validation-for="NoOfBathrooms" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CostPerNight">Cena za noc</label>
+        <input asp-for="CostPerNight" class="form-control" />
+        <span asp-validation-for="CostPerNight" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Dodaj pokój" />
+    </div>
+</form>

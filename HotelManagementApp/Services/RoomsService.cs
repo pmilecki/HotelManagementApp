@@ -3,7 +3,10 @@ using HotelManagementApp.Entities;
 using HotelManagementApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelManagementApp.Services
 {
@@ -51,6 +54,57 @@ namespace HotelManagementApp.Services
             roomLocalization = "Piętro: " + localization.Floor.ToString() + ", skrzydło: " + localization.Wing.ToString();
 
             return roomLocalization;
+        }
+
+        public SelectList GetAllLocalizations()
+        {
+            RoomsModel rooms = new RoomsModel();
+
+            List<SelectListItem> localizations = new List<SelectListItem>();
+
+            var list = (from l in _dbContext.Localization
+                        select new SelectListItem
+                        {
+                            Text = "Piętro: " + l.Floor.ToString() + " " + l.Wing,
+                            Value = l.Id.ToString()
+                        });
+            
+            foreach (var l in list)
+            {
+                localizations.Add(l);
+            }
+
+            SelectList output = new SelectList(localizations, "Value", "Text");
+            return output;
+        }
+
+        public async Task Add(RoomsModel room)
+        {
+            var entity = new RoomsEntity
+            {
+                RoomNumber = room.RoomNumber,
+                Localization = room.Localization,
+                IsUsable = room.IsUsable,
+                NoOfSingleBeds = room.NoOfSingleBeds,
+                NoOfDualBeds = room.NoOfDualBeds,
+                NoOfBathrooms = room.NoOfBathrooms,
+                CostPerNight = room.CostPerNight
+            };
+
+            await _dbContext.Rooms.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddLocalization(LocalizationModel localization)
+        {
+            var entity = new LocalizationEntity
+            {
+                Wing = localization.Wing,
+                Floor = localization.Floor
+            };
+
+            await _dbContext.Localization.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
