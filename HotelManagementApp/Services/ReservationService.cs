@@ -83,5 +83,17 @@ namespace HotelManagementApp.Services
                 return true;
             }
         }
+
+        public bool IsEndDateAfterStartDate(ReservationModel reservation)
+        {
+            if (reservation.ReservationEnd > reservation.ReservationStart)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

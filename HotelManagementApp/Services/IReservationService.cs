@@ -13,5 +13,6 @@ namespace HotelManagementApp.Services
         Task<string> GetUserPhone();
         Task RemoveReservation(string reservationData);
         bool IsRoomAvaliableForReservation(ReservationModel reservation);
+        bool IsEndDateAfterStartDate(ReservationModel reservation);
     }
 }

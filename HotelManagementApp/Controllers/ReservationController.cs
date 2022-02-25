@@ -40,6 +40,12 @@ namespace HotelManagementApp.Controllers
                     return View("Index", reservation);
                 }
 
+                if (!_reservationService.IsEndDateAfterStartDate(reservation))
+                {
+                    ModelState.AddModelError(nameof(reservation.ReservationEnd), "Data końcowa musi być po: " + reservation.ReservationStart.ToShortDateString());
+                    return View("Index", reservation);
+                }
+
                 await _reservationService.Add(reservation);
                 return View();
             }
