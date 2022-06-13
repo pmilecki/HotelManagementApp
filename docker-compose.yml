@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  app:
+    image: ${DOCKER_REGISTRY-}hotelmanagementapp
+    build:
+      context: .
+      dockerfile: App/Dockerfile
+    networks:
+      - app
+  database:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - SA_PASSWORD=<YourNewStrong!Passw0rd>
+      - ACCEPT_EULA=Y
+    networks:
+      - app
+    ports:
+      - "1440:1433"
+
+networks:
+  app:

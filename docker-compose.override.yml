@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  hotelmanagementapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
