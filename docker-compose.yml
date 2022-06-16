@@ -2,21 +2,31 @@ version: '3.4'
 
 services:
   app:
-    image: ${DOCKER_REGISTRY-}hotelmanagementapp
-    build:
-      context: .
-      dockerfile: App/Dockerfile
-    networks:
-      - app
+    build: HotelManagementApp
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "55000:80"
+  app2:
+    build: HotelCanteen
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "55001:80"
+  app3:
+    build: CanteenCatering
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "55002:80"
   database:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       - SA_PASSWORD=<YourNewStrong!Passw0rd>
       - ACCEPT_EULA=Y
-    networks:
-      - app
+    volumes:
+      - database-1:/var/lib/docker/volumes/database-1/_data
     ports:
       - "1440:1433"
-
-networks:
-  app:
+volumes:
+  database-1:

@@ -2,8 +2,8 @@
 
 1. Dockeryzacja aplikacji +
 2. Dockeryzacja bazy danych +
-3. Przygotowane mikroserwisów: -
-	3.1 Mikroserwis hotelowej stołówki -
-	3.2 Mikroserwis firmy cateringowej dostarczającej jedzenie na stołówkę hotelową -
-4. Dockeryzacja mikroserwisów -
-5. Komunikacja między mikroserwisami -
+3. Przygotowane mikroserwisów: +
+	3.1 Mikroserwis hotelowej stołówki +
+	3.2 Mikroserwis firmy cateringowej dostarczającej jedzenie na stołówkę hotelową +
+4. Dockeryzacja mikroserwisów +
+5. Komunikacja między mikroserwisami +
