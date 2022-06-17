@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace HotelManagementApp.Controllers
@@ -26,6 +29,18 @@ namespace HotelManagementApp.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<IActionResult> CanteenMenu()
+        {
+            using var client = new HttpClient();
+
+            var url = "http://app2/api/canteenmenu";
+            var result = await client.GetStringAsync(url);
+
+            var menuList = JsonSerializer.Deserialize<List<MenuModel>>(result.ToString());
+
+            return View(menuList);
         }
 
         public async Task<IActionResult> Rooms()

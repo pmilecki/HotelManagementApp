@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HotelManagementApp.Models.MenuModel>
+
+@{
+    ViewData["Title"] = "CanteenMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CanteenMenu</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Soup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MainDish)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainDish)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
